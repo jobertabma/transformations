@@ -1,5 +1,4 @@
-import React, { useEffect, useReducer, useTransition, Fragment } from "react";
-import { useAsync } from "react-async";
+import React, { useReducer, Fragment } from "react";
 import Combinatorics from "js-combinatorics";
 
 import Base64Encode from "./Transformations/Base64Encode";
@@ -274,7 +273,7 @@ const App = () => {
 
       <footer>
         <div className="section">
-          Made with ❤️ for the hacker community by{" "}
+          Made with <span role="img">❤️</span> for the hacker community by{" "}
           <a
             href="https://twitter.com/jobertabma"
             rel="noopener noreferrer"
