@@ -1,0 +1,37 @@
+{
+  "name": "input-transformation",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "he": "^1.2.0",
+    "js-combinatorics": "^0.5.5",
+    "md5": "^2.2.1",
+    "prettier": "^1.19.1",
+    "react": "^0.0.0-experimental-e5d06e34b",
+    "react-async": "^10.0.1",
+    "react-dom": "^0.0.0-experimental-e5d06e34b",
+    "react-scripts": "3.4.0",
+    "sha1": "^1.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
