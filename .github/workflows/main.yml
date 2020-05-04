@@ -12,6 +12,7 @@ jobs:
       -
         name: Build
         run: |
+          yarn install
           yarn build
       -
         name: Deploy

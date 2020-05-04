@@ -14,10 +14,10 @@
     "sha1": "^1.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "yarn run react-scripts start",
+    "build": "yarn run react-scripts build",
+    "test": "yarn run react-scripts test",
+    "eject": "yarn run react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
