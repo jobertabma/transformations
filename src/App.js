@@ -273,7 +273,7 @@ const App = () => {
 
       <footer>
         <div className="section">
-          Made with <span role="img">❤️</span> for the hacker community by{" "}
+          Made with <span role="img" aria-label="Love">❤️</span> for the hacker community by{" "}
           <a
             href="https://twitter.com/jobertabma"
             rel="noopener noreferrer"
