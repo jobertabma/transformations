@@ -1,4 +1,4 @@
-FROM debian
+FROM nginx
 
 RUN apt update &&\
         apt -y install git curl gnupg2 &&\
@@ -8,6 +8,6 @@ RUN apt update &&\
         git -C /root clone https://github.com/jobertabma/transformations &&\
         cd /root/transformations/ &&\
         yarn install &&\
-        yarn build
-
-CMD yarn --cwd /root/transformations/ run start
+        yarn build &&\
+	rm -r /usr/share/nginx/html/ &&\
+	cp -r /root/transformations/build /usr/share/nginx/html
