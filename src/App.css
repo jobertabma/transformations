@@ -67,6 +67,11 @@ code {
 .highlight {
   background-color: yellow;
   border-radius: 2px;
+  padding: 0 2px;
+}
+
+.matchHighlight {
+  background-color: orange;
 }
 
 input[type="text"], textarea {

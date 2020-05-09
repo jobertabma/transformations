@@ -180,8 +180,8 @@ const App = () => {
               <div>
                 <small>
                   {testForInclusion
-                    ? "Enter the encoded output as included in the response."
-                    : "Enter the response that may include the encoded input."}
+                    ? "Enter the response that may include the encoded input."
+                    : "Enter the encoded output as included in the response."}
                 </small>
               </div>
 
@@ -279,37 +279,39 @@ const App = () => {
 
         <aside>
           <div>
-            <strong>Found transformations</strong>
+            <strong>Transformations</strong>
           </div>
 
           <div>
             {isRunning ? (
               <em>Loading...</em>
             ) : matches.length > 0 ? (
-              <ul>
-                {matches.map((match, index) => {
-                  const code = (
-                    <code>
-                      {match[1].reverse().join("(")}("
-                      <span className="highlight">{input}</span>"
-                      {")".repeat(match[1].length)}{" "}
-                      {testForInclusion ? "~" : "="} "
-                      {reactStringReplace(
-                        output,
-                        match[0][match[0].length - 1],
-                        (stringMatch, stringIndex) => (
-                          <span className="highlight" key={stringIndex}>
-                            {stringMatch}
-                          </span>
-                        )
-                      )}
-                      "
-                    </code>
-                  );
-
-                  return <li key={index}>{code}</li>;
-                })}
-              </ul>
+              matches.map((match, index) => {
+                return (
+                  <div key={index} style={{ maxWidth: 600 - 24 * 2 }}>
+                    <pre>
+                      <code>
+                        {reactStringReplace(
+                          output,
+                          match[0][match[0].length - 1],
+                          (stringMatch, stringIndex) => (
+                            <span key={stringIndex}>
+                              <span className="highlight">
+                                {match[0][match[0].length - 1]}
+                              </span>
+                              <span className="highlight matchHighlight">
+                                {" "}
+                                = {match[1].reverse().join("(")}("
+                                {input}"{")".repeat(match[1].length)}
+                              </span>
+                            </span>
+                          )
+                        )}
+                      </code>
+                    </pre>
+                  </div>
+                );
+              })
             ) : (
               <em>No transformations found.</em>
             )}
