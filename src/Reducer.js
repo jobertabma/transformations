@@ -6,6 +6,7 @@ export const ACTION_RESET_MATCHES = "ACTION_RESET_MATCHES";
 export const ACTION_ADD_MATCH = "ACTION_ADD_MATCH";
 export const ACTION_RUN_START = "ACTION_RUN_START";
 export const ACTION_RUN_STOP = "ACTION_RUN_STOP";
+export const ACTION_SET_INCLUSION = "ACTION_SET_INCLUSION";
 
 const reducer = (state, action = {}) => {
   switch (action.type) {
@@ -49,6 +50,11 @@ const reducer = (state, action = {}) => {
       return {
         ...state,
         isRunning: false
+      };
+    case ACTION_SET_INCLUSION:
+      return {
+        ...state,
+        testForInclusion: action.value
       };
     default:
       return state;

@@ -64,7 +64,7 @@ code {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
-input[type="text"] {
+input[type="text"], textarea {
   font-size: 18px;
   box-sizing : border-box;
   width: 100%;

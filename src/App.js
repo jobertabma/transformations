@@ -25,7 +25,8 @@ import reducer, {
   ACTION_TOGGLE_TRANSFORMATION,
   ACTION_ADD_MATCH,
   ACTION_RUN_START,
-  ACTION_RUN_STOP
+  ACTION_RUN_STOP,
+  ACTION_SET_INCLUSION
 } from "./Reducer";
 
 const determineTransformation = (state, dispatch) => {
@@ -33,7 +34,7 @@ const determineTransformation = (state, dispatch) => {
     type: ACTION_RESET_MATCHES
   });
 
-  const { input, output, transformations } = state;
+  const { input, output, transformations, testForInclusion } = state;
 
   const transformationFunctions = [];
 
@@ -68,7 +69,11 @@ const determineTransformation = (state, dispatch) => {
     transformedFunctions.splice(0, 1);
 
     if (transformedOutput.length === combination.length) {
-      if (transformedOutput[transformedOutput.length - 1] === output) {
+      const result = testForInclusion
+        ? output.includes(transformedOutput[transformedOutput.length - 1])
+        : transformedOutput[transformedOutput.length - 1] === output;
+
+      if (result) {
         dispatch({
           type: ACTION_ADD_MATCH,
           value: [transformedOutput, transformedFunctions]
@@ -104,10 +109,18 @@ const App = () => {
       sha1: [SHA1, 0]
     },
     matches: [],
-    isRunning: false
+    isRunning: false,
+    testForInclusion: true
   });
 
-  const { input, output, transformations, matches, isRunning } = state;
+  const {
+    input,
+    output,
+    transformations,
+    matches,
+    isRunning,
+    testForInclusion
+  } = state;
 
   const canStart =
     !isRunning && input.length > 0 && output.length > 0 && input !== output;
@@ -128,10 +141,7 @@ const App = () => {
                 type: ACTION_RUN_START
               });
 
-              setTimeout(
-                () => determineTransformation(state, dispatch),
-                500
-              );
+              setTimeout(() => determineTransformation(state, dispatch), 500);
             }}
           >
             <section>
@@ -168,13 +178,15 @@ const App = () => {
 
               <div>
                 <small>
-                  Enter the encoded output as included in the response.
+                  {testForInclusion
+                    ? "Enter the encoded output as included in the response."
+                    : "Enter the response that may include the encoded input."}
                 </small>
               </div>
 
               <div>
-                <input
-                  type="text"
+                <textarea
+                  value={output}
                   disabled={isRunning}
                   onChange={event =>
                     dispatch({
@@ -182,7 +194,6 @@ const App = () => {
                       value: event.target.value
                     })
                   }
-                  value={output}
                 />
               </div>
             </section>
@@ -235,6 +246,28 @@ const App = () => {
 
             <section>
               <div>
+                <strong>Experimental</strong>
+              </div>
+
+              <div>
+                <label>
+                  <input
+                    type="checkbox"
+                    onChange={event => {
+                      dispatch({
+                        type: ACTION_SET_INCLUSION,
+                        value: !testForInclusion
+                      });
+                    }}
+                    checked={testForInclusion}
+                  />
+                  Test for inclusion instead of equality (slower)
+                </label>
+              </div>
+            </section>
+
+            <section>
+              <div>
                 <button disabled={!canStart} type="submit">
                   Determine smallest transformation
                 </button>
@@ -257,7 +290,8 @@ const App = () => {
                   const code = (
                     <code>
                       {match[1].reverse().join("(")}("{input}"
-                      {")".repeat(match[1].length)} = "{output}"
+                      {")".repeat(match[1].length)}{" "}
+                      {testForInclusion ? "~" : "="} "{output}"
                     </code>
                   );
 
@@ -273,7 +307,11 @@ const App = () => {
 
       <footer>
         <div className="section">
-          Made with <span role="img" aria-label="Love">❤️</span> for the hacker community by{" "}
+          Made with{" "}
+          <span role="img" aria-label="Love">
+            ❤️
+          </span>{" "}
+          for the hacker community by{" "}
           <a
             href="https://twitter.com/jobertabma"
             rel="noopener noreferrer"
