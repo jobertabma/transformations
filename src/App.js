@@ -288,7 +288,7 @@ const App = () => {
             ) : matches.length > 0 ? (
               matches.map((match, index) => {
                 return (
-                  <div key={index} style={{ maxWidth: 600 - 24 * 2 }}>
+                  <div key={index}>
                     <pre>
                       <code>
                         {reactStringReplace(
