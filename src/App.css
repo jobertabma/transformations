@@ -63,7 +63,8 @@ code {
 }
 
 pre {
-  overflow-x: scroll;
+  overflow: scroll;
+  max-height: 1000px;
 }
 
 .highlight {
