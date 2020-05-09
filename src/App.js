@@ -1,5 +1,6 @@
 import React, { useReducer, Fragment } from "react";
 import Combinatorics from "js-combinatorics";
+import reactStringReplace from "react-string-replace";
 
 import Base64Encode from "./Transformations/Base64Encode";
 import Base64Decode from "./Transformations/Base64Decode";
@@ -289,9 +290,20 @@ const App = () => {
                 {matches.map((match, index) => {
                   const code = (
                     <code>
-                      {match[1].reverse().join("(")}("{input}"
+                      {match[1].reverse().join("(")}("
+                      <span className="highlight">{input}</span>"
                       {")".repeat(match[1].length)}{" "}
-                      {testForInclusion ? "~" : "="} "{output}"
+                      {testForInclusion ? "~" : "="} "
+                      {reactStringReplace(
+                        output,
+                        match[0][match[0].length - 1],
+                        (stringMatch, stringIndex) => (
+                          <span className="highlight" key={stringIndex}>
+                            {stringMatch}
+                          </span>
+                        )
+                      )}
+                      "
                     </code>
                   );
 

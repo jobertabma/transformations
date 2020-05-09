@@ -64,6 +64,11 @@ code {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
+.highlight {
+  background-color: yellow;
+  border-radius: 2px;
+}
+
 input[type="text"], textarea {
   font-size: 18px;
   box-sizing : border-box;
