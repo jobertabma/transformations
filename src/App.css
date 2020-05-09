@@ -85,6 +85,10 @@ input[type="text"], textarea {
   font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 }
 
+textarea {
+  resize: vertical;
+}
+
 a {
   color: #2d68f4;
   text-decoration: underline;
